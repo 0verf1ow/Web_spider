@@ -10,7 +10,7 @@ from email.utils import formataddr
 import requests
 from lxml import etree
 
-
+"""获取商品数量"""
 def get_JDcard_num():
     url = "https://src.sjtu.edu.cn/gift/4/"    # 商品信息页面
     try:
@@ -22,6 +22,7 @@ def get_JDcard_num():
         print("[!]网页爬取出错，请手动检查")
         get_JDcard_num()    # 重新爬取
 
+"""发邮件"""
 def send_Email(send_mail, key, person, num, smtp_server):
     ret = True
     if re.findall(r'@\w+.com', send_mail)[0] == '@qq.com':  # 判断是否qq邮箱
@@ -43,8 +44,9 @@ def send_Email(send_mail, key, person, num, smtp_server):
         s = "[!]错误信息：" + str(e)
         output_log(s)
     return ret
-    
-def output_log(s):     # 写日志,打印信息
+
+"""写日志,打印信息"""
+def output_log(s):    
     print(s)
     with open('log.txt', 'a', encoding='utf-8') as log:
         t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
